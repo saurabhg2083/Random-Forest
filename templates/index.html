@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Content here -->
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <h4>Welcome To ML Practical 04-Random Forest</h4>
+
+                <form action="{{url_for('predict_datapoint')}}" method="POST">
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="CRIM" class="col-sm-8 col-form-label">Per capita crime rate by town:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="CRIM" class="form-control" name="CRIM"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="ZN" class="col-sm-8 col-form-label">Proportion of residential land zoned for lots
+                            over 25,000 sq.ft.:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="ZN" class="form-control" name="ZN"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="INDUS" class="col-sm-8 col-form-label">Proportion of non-retail business acres per
+                            town:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="INDUS" class="form-control" name="INDUS"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="CHAS" class="col-sm-8 col-form-label">Charles River dummy variable (= 1 if tract
+                            bounds river; 0 otherwise):</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="CHAS" class="form-control" name="CHAS"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="NOX" class="col-sm-8 col-form-label">Nitric oxides concentration (parts per 10
+                            million):</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="NOX" class="form-control" name="NOX"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="RM" class="col-sm-8 col-form-label">Avg. number of rooms per dwelling:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="RM" class="form-control" name="RM"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="AGE" class="col-sm-8 col-form-label">Proportion of owner-occupied units built prior
+                            to 1940:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="AGE" class="form-control" name="AGE"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="DIS" class="col-sm-8 col-form-label">weighted distances to five Boston employment
+                            centres:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="DIS" class="form-control" name="DIS"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="RAD" class="col-sm-8 col-form-label">index of accessibility to radial
+                            highways:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="RAD" class="form-control" name="RAD"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="TAX" class="col-sm-8 col-form-label">full-value property-tax rate per
+                            $10,000:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="TAX" class="form-control" name="TAX"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="PTRATIO" class="col-sm-8 col-form-label">pupil-teacher ratio by town:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="PTRATIO" class="form-control" name="PTRATIO"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="B" class="col-sm-8 col-form-label">1000(Bk - 0.63)^2 where Bk is the proportion of
+                            blacks by town:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="B" class="form-control" name="B"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="LSTAT" class="col-sm-8 col-form-label">% lower status of the population:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="LSTAT" class="form-control" name="LSTAT"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <label for="MEDV" class="col-sm-8 col-form-label">Median value of owner-occupied homes in
+                            $1000's:</label>
+                        <div class="col-sm-3">
+                            <input type="text" required id="MEDV" class="form-control" name="MEDV"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row" style="margin-bottom: 3px;">
+                        <div class="col-sm-3 offset-md-8">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

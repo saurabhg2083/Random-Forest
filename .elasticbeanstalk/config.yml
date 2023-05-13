@@ -2,11 +2,11 @@ branch-defaults:
   main:
     environment: null
 global:
-  application_name: webscraperbeanstack
+  application_name: random-forest
   branch: main
   default_ec2_keyname: null
   default_platform: Python 3.8
-  default_region: us-east-1
+  default_region: ap-south-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
